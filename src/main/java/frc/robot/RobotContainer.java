@@ -11,20 +11,20 @@ import frc.robot.commands.AutoCommand.PrimitiveIntake_Auto;
 import frc.robot.commands.AutoCommand.ShootCoral_Auto;
 import frc.robot.commands.AutoCommand.TrackLeftReef_Auto;
 import frc.robot.commands.AutoCommand.TrackRightReef_Auto;
-import frc.robot.commands.IntakeCommands.Coral_L1;
-import frc.robot.commands.IntakeCommands.Coral_L2;
-import frc.robot.commands.IntakeCommands.Coral_L3;
-import frc.robot.commands.IntakeCommands.Coral_L4;
-import frc.robot.commands.IntakeCommands.IntakeAlgae_Floor;
-import frc.robot.commands.IntakeCommands.IntakeAlgae_High;
-import frc.robot.commands.IntakeCommands.IntakeAlgae_Low;
-import frc.robot.commands.IntakeCommands.IntakeCoral;
-import frc.robot.commands.IntakeCommands.OutAlgae;
-import frc.robot.commands.IntakeCommands.PrimitiveIntake;
-import frc.robot.commands.IntakeCommands.PrimitiveIntake_Algae;
-import frc.robot.commands.IntakeCommands.ShootNet;
-import frc.robot.commands.IntakeCommands.ShootProcessor;
-import frc.robot.commands.IntakeCommands.TurnMore;
+import frc.robot.commands.ManualCommands.Coral_L1;
+import frc.robot.commands.ManualCommands.Coral_L2;
+import frc.robot.commands.ManualCommands.Coral_L3;
+import frc.robot.commands.ManualCommands.Coral_L4;
+import frc.robot.commands.ManualCommands.IntakeAlgae_Floor;
+import frc.robot.commands.ManualCommands.IntakeAlgae_High;
+import frc.robot.commands.ManualCommands.IntakeAlgae_Low;
+import frc.robot.commands.ManualCommands.IntakeCoral;
+import frc.robot.commands.ManualCommands.OutAlgae;
+import frc.robot.commands.ManualCommands.PrimitiveIntake;
+import frc.robot.commands.ManualCommands.PrimitiveIntake_Algae;
+import frc.robot.commands.ManualCommands.ShootNet;
+import frc.robot.commands.ManualCommands.ShootProcessor;
+import frc.robot.commands.ManualCommands.TurnMore;
 import frc.robot.commands.TrackCommands.TrackLeftReef;
 import frc.robot.commands.TrackCommands.TrackRightReef;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -101,18 +101,14 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
+    // Driver Controller
     DoubleSupplier xSpeedFunc = ()-> driverController.getRawAxis(1);
     DoubleSupplier ySpeedFunc = ()-> driverController.getRawAxis(0);
     DoubleSupplier zSpeedFunc = ()-> driverController.getRawAxis(4);
 
     BooleanSupplier isSlowFunc = ()-> driverController.getHID().getRightTriggerAxis() > 0.2;
     BooleanSupplier ifFeed = ()-> driverController.getHID().getLeftTriggerAxis() > 0.2;
-    //
-    
+
     driverController.leftBumper().whileTrue(new TrackLeftReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     // driverController.leftTrigger(0.4).toggleOnTrue(new TrackMiddleReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
     driverController.rightBumper().whileTrue(new TrackRightReef(m_PhotonVisionSubsystem, m_SwerveSubsystem));
@@ -123,6 +119,8 @@ public class RobotContainer {
         m_SwerveSubsystem.resetGyro();
       })
     );
+
+    // Operator Controller
     operatorController.pov(180).toggleOnTrue(new Coral_L1(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.pov(0).toggleOnTrue(new Coral_L2(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
     operatorController.leftTrigger().toggleOnTrue(new Coral_L3(m_ElevatorSubsystem, m_EndEffectorSubsystem, ifFeed));
@@ -139,6 +137,7 @@ public class RobotContainer {
     operatorController.axisGreaterThan(5, 0.6).whileTrue(new OutAlgae(m_EndEffectorSubsystem));
     operatorController.axisGreaterThan(1, 0.6).whileTrue(new TurnMore(m_EndEffectorSubsystem));
 
+    // Set the default drive command 
     m_SwerveSubsystem.setDefaultCommand(new ManualDrive_Kraken(m_SwerveSubsystem, xSpeedFunc, ySpeedFunc, zSpeedFunc, isSlowFunc));
   }
 

@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.IntakeCommands;
+package frc.robot.commands.ManualCommands;
 
 import java.util.function.BooleanSupplier;
 
@@ -10,14 +10,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
-import frc.robot.subsystems.PhotonVisionSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Coral_L1 extends Command {
-  /** Creates a new Coral_L1. */
   private final ElevatorSubsystem m_Elevator;
   private final EndEffectorSubsystem m_EndEffector;
   private final BooleanSupplier ifFeedFunc;
+  // Variables
   private boolean ifFeed;
 
   public Coral_L1(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
@@ -27,7 +25,6 @@ public class Coral_L1 extends Command {
     addRequirements(m_Elevator, m_EndEffector);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     LEDConstants.intakeArriving = true;
