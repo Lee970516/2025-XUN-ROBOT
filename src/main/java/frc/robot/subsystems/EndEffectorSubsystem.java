@@ -251,13 +251,14 @@ public class EndEffectorSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("EndEffector/feedforwardOutput", feedforwardOutput);
       SmartDashboard.putNumber("EndEffector/Output", output);
       SmartDashboard.putBoolean("EndEffector/arrivedSetpoint", arrivedSetpoint());
-      SmartDashboard.putBoolean("EndEffector/First IR", getFirstIR());
-      SmartDashboard.putBoolean("EndEffector/Second IR", getSecondIR());
+      SmartDashboard.putBoolean("EndEffector/FirstIR", getFirstIR());
+      SmartDashboard.putBoolean("EndEffector/SecondIR", getSecondIR());
       SmartDashboard.putBoolean("EndEffector/hasCoral", hasCoral());
-      SmartDashboard.putBoolean("EndEffector/HasSensorAlgae", hasAlgae());
-      SmartDashboard.putNumber("EndEffector/AbsolutedArmPosition", getAbsolutePosition());
-      SmartDashboard.putNumber("EndEffector/ArmAngle", getAngle());
-      SmartDashboard.putNumber("EndEffector/getPosition", getPosition());
-      SmartDashboard.putNumber("EndEffector Current", wheelMotor.getStatorCurrent().getValueAsDouble());
+      SmartDashboard.putBoolean("EndEffector/hasAlgae", hasAlgae());
+      SmartDashboard.putNumber("EndEffector/PivotAbsPosition", getAbsolutePosition());
+      SmartDashboard.putNumber("EndEffector/PivotAngle", getAngle());
+      SmartDashboard.putNumber("EndEffector/PivotPosition", getPosition());
+      SmartDashboard.putNumber("EndEffector/PivotGoal", goalAngle);
+      SmartDashboard.putNumber("EndEffector/WheelCurrent", wheelMotor.getStatorCurrent().getValueAsDouble());
   }
 }
