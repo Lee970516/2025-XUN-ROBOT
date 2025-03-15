@@ -5,15 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "IntakeCoral_IDLE"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LeftSide Out To E(Reef)"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeCoral_IDLE"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftSide Out To E(Reef)"
+                }
+              }
+            ]
           }
         },
         {
@@ -25,7 +32,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 0.8
           }
         },
         {
@@ -65,15 +72,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "IntakeCoral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "E(Reef) Out To LeftCoralStation"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeCoral"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "E(Reef) Out To LeftCoralStation"
+                }
+              }
+            ]
           }
         },
         {
@@ -137,15 +151,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "IntakeCoral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "D(Reef) Out To LeftCoralStation"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeCoral"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "D(Reef) Out To LeftCoralStation"
+                }
+              }
+            ]
           }
         },
         {
@@ -209,15 +230,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "IntakeCoral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "C(Reef) Out To LeftCoralStation"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeCoral"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "C(Reef) Out To LeftCoralStation"
+                }
+              }
+            ]
           }
         },
         {
@@ -281,15 +309,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "IntakeCoral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "B(Reef) Out To LeftCoralStation"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakeCoral"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "B(Reef) Out To LeftCoralStation"
+                }
+              }
+            ]
           }
         }
       ]
