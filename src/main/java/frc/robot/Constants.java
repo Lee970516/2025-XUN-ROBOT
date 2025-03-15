@@ -325,7 +325,7 @@ public final class Constants {
     public static final int armAbsolutedEncoder_ID = 45;
     public static final int irSensor_CoralFirst_ID = 0;
     public static final int irSensor_CoralSecond_ID = 1;
-    public static final int irSensor_Algae_ID = 3;
+    public static final int irSensor_Algae_ID = 2;
 
     public static final double absolutedEncoderOffset = 0.140625;
 

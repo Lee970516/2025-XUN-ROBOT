@@ -41,14 +41,8 @@ public class Coral_L4_Elevator_Auto extends Command {
       m_ElevatorSubsystem.outCoral_L4();    
       if(m_ElevatorSubsystem.arriveSetPoint()) {
         m_EndEffectorSubsystem.Arm_shootCoral_L4();
-
-        if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
-          LEDConstants.arrivePosition_Intake = true;
-          LEDConstants.LEDFlag = true;
-        }else {
-          LEDConstants.arrivePosition_Intake = false;
-          LEDConstants.LEDFlag = true;
-        }
+        LEDConstants.arrivePosition_Intake = true;
+        LEDConstants.LEDFlag = true;
       }
     }
     
@@ -64,6 +58,10 @@ public class Coral_L4_Elevator_Auto extends Command {
     // LEDConstants.intakeArriving = false;
     // LEDConstants.arrivePosition_Intake = false;
     // LEDConstants.LEDFlag = true;
+    if(m_ElevatorSubsystem.arriveSetPoint()) {
+      LEDConstants.arrivePosition_Intake = true;
+      LEDConstants.LEDFlag = true;
+    }
   }
 
   // Returns true when the command should end.

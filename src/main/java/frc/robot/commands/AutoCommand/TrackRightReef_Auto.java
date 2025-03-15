@@ -96,7 +96,7 @@ public class TrackRightReef_Auto extends Command {
       // if(xPidController.getError() < 0.02) SmartDashboard.putBoolean("Align/LeftReefAlign", true);
       // else SmartDashboard.putBoolean("Align/LeftReefAlign", false);
 
-      if(m_PhotonVisionSubsystem.isArrive_Reef("RightReef")) {
+      if(xPidError <= 0.2 && yPidError <= 0.2 && rotationPidError <= 1) {
         LEDConstants.arrivePosition_Base = true;
         LEDConstants.LEDFlag = true;
       }

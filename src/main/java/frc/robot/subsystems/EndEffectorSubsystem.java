@@ -200,6 +200,10 @@ public class EndEffectorSubsystem extends SubsystemBase {
       return (irSensor_CoralSecond.get());
     }
 
+    public boolean getAlgaeIR() {
+      return irSensor_Algae.get();
+    }
+
     public boolean shouldCoralSlow() {
       return !getFirstIR() && !getSecondIR();
     }
@@ -253,6 +257,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
       SmartDashboard.putBoolean("EndEffector/arrivedSetpoint", arrivedSetpoint());
       SmartDashboard.putBoolean("EndEffector/FirstIR", getFirstIR());
       SmartDashboard.putBoolean("EndEffector/SecondIR", getSecondIR());
+      SmartDashboard.putBoolean("EndEffector/AlgaeIR", getAlgaeIR());
       SmartDashboard.putBoolean("EndEffector/hasCoral", hasCoral());
       SmartDashboard.putBoolean("EndEffector/hasAlgae", hasAlgae());
       SmartDashboard.putNumber("EndEffector/PivotAbsPosition", getAbsolutePosition());

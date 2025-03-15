@@ -38,6 +38,8 @@ public class ShootCoral_Auto extends Command {
     m_EndEffectorSubsystem.stopWheel();
 
     LEDConstants.arrivePosition_Intake = false;
+    LEDConstants.tracking = false;
+    LEDConstants.intakeArriving = false;
     LEDConstants.arrivePosition_Base = false;
     LEDConstants.LEDFlag = true;
   }

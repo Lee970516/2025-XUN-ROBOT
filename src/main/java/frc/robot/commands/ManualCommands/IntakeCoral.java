@@ -40,17 +40,6 @@ public class IntakeCoral extends Command {
     if(!m_EndEffector.getFirstIR() && !m_EndEffector.getSecondIR()) {
       m_EndEffector.intakeCoralSlow_Wheel();
     }
-    // else {
-    //   m_EndEffector.intakeCoral_Wheel();
-    // }
-    
-    if(m_EndEffector.getFirstIR() && !m_EndEffector.getSecondIR()) {
-      LEDConstants.hasGamePiece = true;
-      LEDConstants.LEDFlag = true;
-    }else {
-      LEDConstants.hasGamePiece = false;
-      LEDConstants.LEDFlag = true;
-    }
   }
 
   // Called once the command ends or is interrupted.

@@ -307,10 +307,10 @@ public class PhotonVisionSubsystem extends SubsystemBase {
       frontLeftTarget_ID = frontLeftTarget.getFiducialId();
       
 
-      SmartDashboard.putNumber("Photon/BotXError_Front", botXMeasurements_FrontLeft);
-      SmartDashboard.putNumber("Photon/BotYError_Front", botYMeasurements_FrontLeft);
-      SmartDashboard.putNumber("Photon/BotRotationError_Front", botRotationMeasurements_FrontLeft);
-      SmartDashboard.putNumber("Photon/FrontTarget_ID", frontLeftTarget_ID);
+      SmartDashboard.putNumber("Photon/BotXError_FrontLeft", getXError_Reef("FrontLeft"));
+      SmartDashboard.putNumber("Photon/BotYError_FrontLeft", getYError_Reef("FrontLeft"));
+      SmartDashboard.putNumber("Photon/BotRotationError_FrontLeft", getRotationError_Reef("FrontLeft"));
+      SmartDashboard.putNumber("Photon/FrontLeftTarget_ID", frontLeftTarget_ID);
 
     }else {
       botXMeasurements_FrontLeft = 0;
