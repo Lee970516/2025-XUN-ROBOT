@@ -136,7 +136,7 @@ public class SwerveSubsystem_Neo extends SubsystemBase {
     robotToFrontRightCamera = new Transform3d(new Translation3d(0, 0, 0), new Rotation3d(getRotation()));
     robotToFrontLeftCamera = new Transform3d(new Translation3d(0, 0, 0), new Rotation3d(getRotation()));
 
-    aprilTagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+    aprilTagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
 
     

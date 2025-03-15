@@ -78,7 +78,7 @@ public class PhotonVisionSubsystem extends SubsystemBase {
     robotToFrontLeft = new Transform3d(-0.2555, -0.221, 0.21, new Rotation3d(new Rotation2d(Units.degreesToRadians(48.964))));
     robotToBack = new Transform3d(0, 0, 0, new Rotation3d(new Rotation2d(0)));
 
-    aprilTagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+    aprilTagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
   }
 
