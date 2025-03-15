@@ -213,7 +213,7 @@ public class EndEffectorSubsystem extends SubsystemBase {
     }
 
     public boolean hasAlgae() {
-      return wheelOverCurrent();
+      return !irSensor_Algae.get();
     }
 
     public boolean wheelOverCurrent(){

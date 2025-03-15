@@ -79,12 +79,12 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Coral_L4_RightReef", new Coral_L4_Auto_RightReef(m_ElevatorSubsystem, m_EndEffectorSubsystem, m_SwerveSubsystem, m_PhotonVisionSubsystem));
     NamedCommands.registerCommand("stopMotor", Commands.runOnce(() -> m_SwerveSubsystem.stopMotor(), m_SwerveSubsystem));
     NamedCommands.registerCommand("IntakeCoral", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(10));
-    NamedCommands.registerCommand("PrimitiveIntake", new PrimitiveIntake_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
+    NamedCommands.registerCommand("PrimitiveIntake", new PrimitiveIntake_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.8));
     NamedCommands.registerCommand("Coral_L4_Intake", new Coral_L4_Elevator_Auto(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("IntakeCoral_IDLE", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2));
-    NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(2));
-    NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(1));
+    NamedCommands.registerCommand("IntakeCoral_IDLE", new IntakeCoral(m_ElevatorSubsystem, m_EndEffectorSubsystem).withTimeout(0.5));
+    NamedCommands.registerCommand("TrackLeftReef_Auto", new TrackLeftReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.5));
+    NamedCommands.registerCommand("TrackRightReef_Auto", new TrackRightReef_Auto(m_PhotonVisionSubsystem, m_SwerveSubsystem).withTimeout(0.5));
+    NamedCommands.registerCommand("ShootCoral_Auto", new ShootCoral_Auto(m_EndEffectorSubsystem).withTimeout(0.3));
 
     autoChooser = AutoBuilder.buildAutoChooser();
     configureBindings();

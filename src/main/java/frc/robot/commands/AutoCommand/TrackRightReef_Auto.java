@@ -127,8 +127,6 @@ public class TrackRightReef_Auto extends Command {
   @Override
   public void end(boolean interrupted) {
     m_SwerveSubsystem.drive(0, 0, 0, false);
-    LEDConstants.tracking = false;
-    LEDConstants.LEDFlag = true;
   }
 
   // Returns true when the command should end.

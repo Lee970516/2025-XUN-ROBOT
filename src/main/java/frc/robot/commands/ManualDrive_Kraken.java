@@ -80,9 +80,9 @@ public class ManualDrive_Kraken extends Command {
       ySpeed = ySpeed*Math.abs(ySpeed)*0.2;
       zSpeed = zSpeed*Math.abs(zSpeed)*0.1;
     }else {
-      xSpeed = xSpeed*Math.abs(xSpeed)*0.6;
-      ySpeed = ySpeed*Math.abs(ySpeed)*0.6;
-      zSpeed = zSpeed*Math.abs(zSpeed)*0.4;
+      xSpeed = xSpeed*Math.abs(xSpeed)*0.8;
+      ySpeed = ySpeed*Math.abs(ySpeed)*0.8;
+      zSpeed = zSpeed*Math.abs(zSpeed)*0.3;
     }
 
     SmartDashboard.putNumber("ManualDrive/Xspeed", xSpeed);

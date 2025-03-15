@@ -37,6 +37,7 @@ public class ShootCoral_Auto extends Command {
   public void end(boolean interrupted) {
     m_EndEffectorSubsystem.stopWheel();
 
+    LEDConstants.arrivePosition_Intake = false;
     LEDConstants.arrivePosition_Base = false;
     LEDConstants.LEDFlag = true;
   }
