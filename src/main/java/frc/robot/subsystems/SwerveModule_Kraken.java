@@ -50,7 +50,7 @@ public class SwerveModule_Kraken extends SubsystemBase {
     turningPidController = new PIDController(Module_KrakenConstants.turningPidController_Kp, Module_KrakenConstants.turningPidController_Ki, Module_KrakenConstants.turningPidController_Kd);
     turningPidController.enableContinuousInput(Module_KrakenConstants.pidRangeMin, Module_KrakenConstants.pidRangeMax);
 
-    driveFeedForward = new SimpleMotorFeedforward(Module_KrakenConstants.driveFeedforward_Ks, Module_KrakenConstants.driveFeedforward_Kv);
+    driveFeedForward = new SimpleMotorFeedforward(Module_KrakenConstants.driveFeedforward_Ks, Module_KrakenConstants.driveFeedforward_Kv, Module_KrakenConstants.driveFeedforward_Ka);
 
     turningConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     driveConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
