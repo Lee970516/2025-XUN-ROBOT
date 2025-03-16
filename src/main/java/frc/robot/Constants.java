@@ -81,8 +81,8 @@ public final class Constants {
     public static final double drivePidController_Kd = 0;
 
     public static final double driveFeedforward_Ks = 0.13;
-    public static final double driveFeedforward_Kv = 1.63;
-    public static final double driveFeedforward_Ka = 1.88;
+    public static final double driveFeedforward_Kv = 1.73;
+    public static final double driveFeedforward_Ka = 1.41;
 
   }
 
@@ -100,6 +100,8 @@ public final class Constants {
     public static final int leftFrontAbsolutedEncoder_ID = 42;
     public static final int leftBackAbsolutedEncoder_ID = 41;
     public static final int rightFrontAbsolutedEncoder_ID = 43;
+
+
     public static final int rightBackAbsolutedEncoder_ID = 44;
 
     public static final double leftFrontOffset = -0.352806;
@@ -386,10 +388,13 @@ public final class Constants {
   }
 
   public static class ClimberConstants {
-    public static final int climbMotor_ID = 0;
+    public static final int firstMotor_ID = 0;
+    public static final int secondMotor_ID = 0;
+
     public static final int absolutedEncoder_ID = 0;
 
-    public static final boolean MotorReverse = false;
+    public static final boolean firstMotorReverse = false;
+    public static final boolean secondMotorReverse = false;
 
     public static final double absolutedEncoderOffset = 0;
 

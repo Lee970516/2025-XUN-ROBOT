@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -15,13 +16,19 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimberConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new ClimberSubsystem. */
-  private final SparkMax climbMotor;
-  private final SparkMaxConfig climbConfig;
+  private final SparkMax firstMotor;
+  private final SparkMax secondMotor;
+
+  private final SparkMaxConfig firstMotorConfig;
+  private final SparkMaxConfig secondMotorConfig;
+
+  private final RelativeEncoder firstEncoder;
 
   private final CANcoder absolutedEncoder;
   private final CANcoderConfiguration absolutedEncoderConfig;
@@ -34,19 +41,29 @@ public class ClimberSubsystem extends SubsystemBase {
   public ClimberSubsystem() {
     goalAngle = ClimberConstants.climbInAngle;
     //Climber Motor
-    climbMotor = new SparkMax(ClimberConstants.climbMotor_ID, MotorType.kBrushless);
-    climbConfig = new SparkMaxConfig();
+    firstMotor = new SparkMax(ClimberConstants.firstMotor_ID, MotorType.kBrushless);
+    secondMotor = new SparkMax(ClimberConstants.secondMotor_ID, MotorType.kBrushless);
 
-    climbConfig.idleMode(IdleMode.kBrake);
-    climbConfig.inverted(ClimberConstants.MotorReverse);
+    firstMotorConfig = new SparkMaxConfig();
+    secondMotorConfig = new SparkMaxConfig();
+    
+    firstMotorConfig.idleMode(IdleMode.kBrake);
+    secondMotorConfig.idleMode(IdleMode.kBrake);
+    firstMotorConfig.inverted(ClimberConstants.firstMotorReverse);
+    secondMotorConfig.inverted(ClimberConstants.secondMotorReverse);
 
-    climbMotor.configure(climbConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+    secondMotorConfig.follow(firstMotor.getDeviceId(), true);
+
+    firstMotor.configure(firstMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+    secondMotor.configure(secondMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     //Climber AbsolutedEncoder
     absolutedEncoder = new CANcoder(ClimberConstants.absolutedEncoder_ID);
     absolutedEncoderConfig = new CANcoderConfiguration();
 
     absolutedEncoderConfig.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
     absolutedEncoderConfig.MagnetSensor.MagnetOffset = ClimberConstants.absolutedEncoderOffset;
+
+    firstEncoder = firstMotor.getEncoder();
 
     absolutedEncoder.getConfigurator().apply(absolutedEncoderConfig);
 
@@ -63,6 +80,10 @@ public class ClimberSubsystem extends SubsystemBase {
     return absolutedEncoder.getAbsolutePosition().getValueAsDouble();
   }
 
+  public double getRelativePosition() {
+    return firstEncoder.getPosition();
+  }
+
   public void setOutAngle(){
     goalAngle = ClimberConstants.climbOutAngle;
   }
@@ -75,6 +96,11 @@ public class ClimberSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     pidOutput = climbPID.calculate(getAngle(), goalAngle);
-    climbMotor.set(pidOutput);
+    firstMotor.set(pidOutput);
+
+    SmartDashboard.putNumber("Climber/AbsolutedPosition", getAbsolutedPosition());
+    SmartDashboard.putNumber("Climber/GoalAngle", goalAngle);
+    SmartDashboard.putNumber("Climber/CurrentAngle", getAngle());
+    SmartDashboard.putNumber("Climber/RelativePositon", getRelativePosition());
   }
 }

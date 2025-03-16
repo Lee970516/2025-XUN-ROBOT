@@ -228,6 +228,8 @@ public class SwerveSubsystem_Kraken extends SubsystemBase {
     SmartDashboard.putNumber("Swerve/leftBackDrivingMotorPosition", leftBack.getDrivePosition());
     SmartDashboard.putNumber("Swerve/rightFrontDrivingMotorPosition", rightFront.getDrivePosition());
     SmartDashboard.putNumber("Swerve/rightBackDrivingMotorPosition", rightBack.getDrivePosition());
+
+    SmartDashboard.putNumber("Swerve/leftFrontDrivingVelocity", leftFront.getDriveVelocity());
     
     SmartDashboard.putNumber("Swerve/leftFrontStateAngle", leftFront.getStateAngle());
     SmartDashboard.putNumber("Swerve/leftFrontAngle", leftFront.getTurningAngle());
