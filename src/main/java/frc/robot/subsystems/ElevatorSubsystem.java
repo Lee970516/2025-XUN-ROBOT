@@ -54,7 +54,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorSlot0Config.kI = 0;
     elevatorSlot0Config.kD = 0;
 
-    elevatorMotionMagicConfig.MotionMagicCruiseVelocity = 40;
+    elevatorMotionMagicConfig.MotionMagicCruiseVelocity = 60;
     elevatorMotionMagicConfig.MotionMagicAcceleration = 80;
     elevatorMotionMagicConfig.MotionMagicJerk = 400;
 

@@ -19,6 +19,7 @@ import com.ctre.phoenix6.signals.SensorDirectionValue;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.math.filter.Debouncer.DebounceType;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -53,7 +54,8 @@ public class EndEffectorSubsystem extends SubsystemBase {
   private double output;
   private double goalAngle;
 
-  private Debouncer m_Debouncer;
+  private Debouncer m_Debouncer_first;
+  private Debouncer m_Debouncer_second;
 
     public EndEffectorSubsystem() {
       // Motor controller
@@ -124,7 +126,8 @@ public class EndEffectorSubsystem extends SubsystemBase {
       // armPID.setIntegratorRange(EndEffectorConstants.armPIDMinOutput, EndEffectorConstants.armPIDMaxOutput);
 
       // Init debouncer
-      m_Debouncer = new Debouncer(0.2);
+      m_Debouncer_first = new Debouncer(0.05, DebounceType.kRising);
+      m_Debouncer_second = new Debouncer(0.05, DebounceType.kRising);
     }
   
     // ======== Arm ========
@@ -194,10 +197,10 @@ public class EndEffectorSubsystem extends SubsystemBase {
     
     // IR sensor
     public boolean getFirstIR() {
-      return irSensor_CoralFirst.get();
+      return m_Debouncer_first.calculate(irSensor_CoralFirst.get());
     }
     public boolean getSecondIR() {
-      return (irSensor_CoralSecond.get());
+      return m_Debouncer_second.calculate(irSensor_CoralSecond.get());
     }
 
     public boolean getAlgaeIR() {

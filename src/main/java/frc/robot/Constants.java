@@ -81,8 +81,8 @@ public final class Constants {
     public static final double drivePidController_Kd = 0;
 
     public static final double driveFeedforward_Ks = 0.13;
-    public static final double driveFeedforward_Kv = 1.73;
-    public static final double driveFeedforward_Ka = 1.41;
+    public static final double driveFeedforward_Kv = 2;
+    public static final double driveFeedforward_Ka = 0;
 
   }
 
