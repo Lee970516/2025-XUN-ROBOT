@@ -77,19 +77,19 @@ public class TrackLeftReef extends Command {
     if(m_PhotonVisionSubsystem.hasFrontRightTarget()) {
       // Rotation-PID calculations
       rotationPidMeasurements = m_PhotonVisionSubsystem.getRotationMeasurements_FrontRight();
-      rotationPidError = Math.abs(rotationPidMeasurements - PhotonConstants.rotationPidSetPoint_LeftReef);
+      rotationPidError = m_PhotonVisionSubsystem.getRotationError_Reef("LeftReef");
       rotationPidMeasurements = (rotationPidError > 0.5) ? rotationPidMeasurements : PhotonConstants.rotationPidSetPoint_LeftReef;
       rotationPidOutput = rotationPidController.calculate(rotationPidMeasurements, PhotonConstants.rotationPidSetPoint_LeftReef);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Reef);
       // Y-PID calculations
       yPidMeasurements = m_PhotonVisionSubsystem.getYMeasurements_FrontRight();
-      yPidError = Math.abs(yPidMeasurements - PhotonConstants.yPidSetPoint_LeftReef);
+      yPidError = m_PhotonVisionSubsystem.getYError_Reef("LeftReef");
       yPidMeasurements = (yPidError > 0.02) ? yPidMeasurements : PhotonConstants.yPidSetPoint_LeftReef;
       yPidOutput = -yPidController.calculate(yPidMeasurements, PhotonConstants.yPidSetPoint_LeftReef);
       yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Reef);
       // X-PID calculations
       xPidMeasurements = m_PhotonVisionSubsystem.getXMeasurements_FrontRight();
-      xPidError = Math.abs(xPidMeasurements - PhotonConstants.xPidSetPoint_LeftReef);
+      xPidError = m_PhotonVisionSubsystem.getRotationError_Reef("LeftReef");
       xPidMeasurements = (xPidError > 0.02) ? xPidMeasurements : PhotonConstants.xPidSetPoint_LeftReef;
       xPidOutput = -xPidController.calculate(xPidMeasurements, PhotonConstants.xPidSetPoint_LeftReef);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidSetPoint_LeftReef);

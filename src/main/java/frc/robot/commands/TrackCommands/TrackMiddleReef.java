@@ -26,9 +26,9 @@ public class TrackMiddleReef extends Command {
   private PIDController xPidController;
   private PIDController yPidController;
 
-  private double xMeasure;
-  private double yMeasure;
-  private double rotationMeasure;
+  private double xMeasurement;
+  private double yMeasurement;
+  private double rotationMeasurement;
 
   private double xPidError;
   private double yPidError;
@@ -72,38 +72,41 @@ public class TrackMiddleReef extends Command {
     if(m_PhotonVisionSubsystem.hasFrontRightTarget()) {
       // Rotation-PID calculations
       
-      rotationMeasure = m_PhotonVisionSubsystem.getRotationMeasurements_FrontRight();
-      rotationMeasure = MathUtil.applyDeadband(rotationError, 0.5);
-      rotationPidOutput = rotationPidController.calculate(rotationMeasure, PhotonConstants.rotationPidSetPoint_MiddleReef_FrontRight);
+      rotationMeasurement = m_PhotonVisionSubsystem.getRotationMeasurements_FrontRight();
+      rotationError = m_PhotonVisionSubsystem.getRotationError_Reef("MiddleReef_FrontRight");
+      rotationMeasurement = rotationError >= 0.5 ? rotationMeasurement : PhotonConstants.rotationPidSetPoint_MiddleReef_FrontRight;
+      rotationPidOutput = rotationPidController.calculate(rotationMeasurement, PhotonConstants.rotationPidSetPoint_MiddleReef_FrontRight);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Reef);
       // Y-PID calculations
-      yMeasure = m_PhotonVisionSubsystem.getYMeasurements_FrontRight();
-      yMeasure = MathUtil.applyDeadband(yMeasure, 0.05);
-      yPidOutput = -yPidController.calculate(yMeasure, PhotonConstants.yPidSetPoint_MiddleReef_FrontRight);
+      yMeasurement = m_PhotonVisionSubsystem.getYMeasurements_FrontRight();
+      yPidError = m_PhotonVisionSubsystem.getYError_Reef("MiddleReef_FrontRight");
+      yMeasurement = yPidError >= 0.02 ? yMeasurement : PhotonConstants.yPidSetPoint_MiddleReef_FrontRight;
+      yPidOutput = -yPidController.calculate(yMeasurement, PhotonConstants.yPidSetPoint_MiddleReef_FrontRight);
       yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Reef);
       // X-PID calculations
-      xMeasure = m_PhotonVisionSubsystem.getXMeasurements_FrontRight();
-      xMeasure = MathUtil.applyDeadband(xMeasure, 0.05);
-      xPidOutput = -xPidController.calculate(xMeasure, PhotonConstants.xPidSetPoint_MiddleReef_FrontRight);
+      xMeasurement = m_PhotonVisionSubsystem.getXMeasurements_FrontRight();
+      xPidError = m_PhotonVisionSubsystem.getXError_Reef("MiddleReef_FrontLeft");
+      xMeasurement = xPidError >= 0.02 ? xMeasurement : PhotonConstants.xPidSetPoint_MiddleReef_FrontRight;
+      xPidOutput = -xPidController.calculate(xMeasurement, PhotonConstants.xPidSetPoint_MiddleReef_FrontRight);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Reef);
     }else if(m_PhotonVisionSubsystem.hasFrontLeftTarget()) {
       // Rotation-PID calculations
-      rotationMeasure = m_PhotonVisionSubsystem.getRotationMeasurements_FrontLeft();
-      rotationError = Math.abs(rotationMeasure - PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft);
-      rotationMeasure = (rotationError > 0.5) ? rotationMeasure : PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft;
-      rotationPidOutput = rotationPidController.calculate(rotationMeasure, PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft);
+      rotationMeasurement = m_PhotonVisionSubsystem.getRotationMeasurements_FrontLeft();
+      rotationError = m_PhotonVisionSubsystem.getRotationError_Reef("MiddleReef_FrontLeft");
+      rotationMeasurement = rotationError >= 0.5 ? rotationMeasurement : PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft;
+      rotationPidOutput = rotationPidController.calculate(rotationMeasurement, PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft);
       rotationPidOutput = Constants.setMaxOutput(rotationPidOutput, PhotonConstants.rotationPidMaxOutput_Reef);
       // Y-PID calculations
-      yMeasure = m_PhotonVisionSubsystem.getYMeasurements_FrontLeft();
-      yPidError = Math.abs(yMeasure - PhotonConstants.yPidSetPoint_MiddleReef_FrontLeft);
-      yMeasure = (yPidError > 0.05) ? yMeasure : PhotonConstants.yPidSetPoint_MiddleReef_FrontLeft;
-      yPidOutput = -yPidController.calculate(yMeasure, PhotonConstants.yPidSetPoint_MiddleReef_FrontLeft);
+      yMeasurement = m_PhotonVisionSubsystem.getYMeasurements_FrontLeft();
+      yPidError = m_PhotonVisionSubsystem.getYError_Reef("MiddleReef_FrontLeft");
+      yMeasurement = (yPidError > 0.02) ? yMeasurement : PhotonConstants.yPidSetPoint_MiddleReef_FrontLeft;
+      yPidOutput = -yPidController.calculate(yMeasurement, PhotonConstants.yPidSetPoint_MiddleReef_FrontLeft);
       yPidOutput = Constants.setMaxOutput(yPidOutput, PhotonConstants.yPidMaxOutput_Reef);
       // X-PID calculations
-      xMeasure = m_PhotonVisionSubsystem.getXMeasurements_FrontLeft();
-      xPidError = Math.abs(xMeasure - PhotonConstants.xPidSetPoint_MiddleReef_FrontLeft);
-      xMeasure = (xPidError > 0.05) ? xMeasure : PhotonConstants.xPidSetPoint_MiddleReef_FrontLeft;
-      xPidOutput = -xPidController.calculate(xMeasure, PhotonConstants.xPidSetPoint_MiddleReef_FrontLeft);
+      xMeasurement = m_PhotonVisionSubsystem.getXMeasurements_FrontLeft();
+      xPidError = m_PhotonVisionSubsystem.getXError_Reef("MiddleReef_FrontLeft");
+      xMeasurement = (xPidError > 0.05) ? xMeasurement : PhotonConstants.xPidSetPoint_MiddleReef_FrontLeft;
+      xPidOutput = -xPidController.calculate(xMeasurement, PhotonConstants.xPidSetPoint_MiddleReef_FrontLeft);
       xPidOutput = Constants.setMaxOutput(xPidOutput, PhotonConstants.xPidMaxOutput_Reef);
     }else {
       xPidOutput = 0;
@@ -111,12 +114,7 @@ public class TrackMiddleReef extends Command {
       rotationPidOutput = 0;
     }
 
-    if((xMeasure == PhotonConstants.xPidSetPoint_MiddleReef_FrontRight 
-    && yMeasure == PhotonConstants.yPidSetPoint_MiddleReef_FrontRight
-    && rotationMeasure == PhotonConstants.rotationPidSetPoint_MiddleReef_FrontRight)
-    || (xMeasure == PhotonConstants.xPidSetPoint_MiddleReef_FrontLeft
-    && yMeasure == PhotonConstants.yPidSetPoint_MiddleReef_FrontLeft
-    && rotationMeasure == PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft)) {
+    if(m_PhotonVisionSubsystem.isArrive_Reef("MiddleReef_FrontRight") || m_PhotonVisionSubsystem.isArrive_Reef("Middle_FrontLeft")) {
         LEDConstants.arrivePosition_Base = true;
         LEDConstants.LEDFlag = true;
       }

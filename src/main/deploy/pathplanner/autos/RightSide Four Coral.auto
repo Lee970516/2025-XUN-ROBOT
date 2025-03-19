@@ -9,15 +9,28 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "IntakeCoral_IDLE"
+                  "pathName": "RightSide Out To E(Reef)"
                 }
               },
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "LeftSide Out To E(Reef)"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeCoral_IDLE"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L2_Intake"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -33,12 +46,6 @@
           "type": "named",
           "data": {
             "name": "Coral_L4_Intake"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.8
           }
         },
         {
@@ -61,12 +68,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.7
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -121,18 +122,57 @@
                 }
               },
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "E(Reef) Out To LeftCoralStation"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "E(Reef) Out To RightCoralStations"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "LeftCoralStation Out To D(Reef)"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "RightCoralStations Out To D(Reef)"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L1_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L2_Intake"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
@@ -145,12 +185,6 @@
           "type": "named",
           "data": {
             "name": "Coral_L4_Intake"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.8
           }
         },
         {
@@ -173,12 +207,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.7
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -233,24 +261,57 @@
                 }
               },
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "D(Reef) Out To LeftCoralStation"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "D(Reef) Out To RightCoralStations"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
         {
-          "type": "wait",
+          "type": "parallel",
           "data": {
-            "waitTime": 0.25
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LeftCoralStation Out To C(Reef)"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "RightCoralStations Out To C(Reef)"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L1_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L2_Intake"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
@@ -263,12 +324,6 @@
           "type": "named",
           "data": {
             "name": "Coral_L4_Intake"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.8
           }
         },
         {
@@ -291,12 +346,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.7
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -351,24 +400,57 @@
                 }
               },
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "C(Reef) Out To LeftCoralStation"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "C(Reef) Out To RightCoralStation"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
         {
-          "type": "wait",
+          "type": "parallel",
           "data": {
-            "waitTime": 0.25
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LeftCoralStation Out To B(Reef)"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "RightCoralStations Out To B(Reef)"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L1_Intake"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Coral_L2_Intake"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
@@ -381,12 +463,6 @@
           "type": "named",
           "data": {
             "name": "Coral_L4_Intake"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.8
           }
         },
         {
@@ -409,12 +485,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.7
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -469,9 +539,22 @@
                 }
               },
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "B(Reef) Out To LeftCoralStation"
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "B(Reef) Out To RightCoralStations"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "stopMotor"
+                      }
+                    }
+                  ]
                 }
               }
             ]

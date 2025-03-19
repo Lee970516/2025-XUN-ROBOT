@@ -2,30 +2,27 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.ManualCommands;
+package frc.robot.commands.AutoCommand;
 
 import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.EndEffectorConstants;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffectorSubsystem;
-import frc.robot.subsystems.PhotonVisionSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Coral_L2 extends Command {
-  /** Creates a new Coral_L2_Elevator. */
+public class Coral_L3_Elevator_Auto extends Command {
+  /** Creates a new Coral_L3_Elevator. */
   private final ElevatorSubsystem m_ElevatorSubsystem;
   private final EndEffectorSubsystem m_EndEffectorSubsystem;
 
-  private final BooleanSupplier ifFeedFunc;
-
-  private boolean ifFeed;
-  public Coral_L2(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem, BooleanSupplier ifFeed) {
+  private boolean arriveEndEffectorPrimition;
+  public Coral_L3_Elevator_Auto(ElevatorSubsystem elevatorSubsystem, EndEffectorSubsystem endEffectorSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_ElevatorSubsystem = elevatorSubsystem;
     this.m_EndEffectorSubsystem = endEffectorSubsystem;
-    this.ifFeedFunc = ifFeed;
 
     addRequirements(m_ElevatorSubsystem, m_EndEffectorSubsystem);
   }
@@ -33,7 +30,11 @@ public class Coral_L2 extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_EndEffectorSubsystem.primitiveArm();
+    // m_ElevatorSubsystem.outCoral_L3();
+    // m_EndEffectorSubsystem.Arm_shootCoral_L3();
+    m_EndEffectorSubsystem.Arm_IDLE();
+
+    arriveEndEffectorPrimition = false;
 
     LEDConstants.intakeArriving = true;
     LEDConstants.arrivePosition_Intake = false;
@@ -43,26 +44,23 @@ public class Coral_L2 extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if(m_EndEffectorSubsystem.canUp()) {
-      m_ElevatorSubsystem.outCoral_L2();
-      m_EndEffectorSubsystem.Arm_shootCoral_L2();
+    if(Math.abs(m_EndEffectorSubsystem.getAngle() - EndEffectorConstants.primitiveAngle) <= 2) {
+      arriveEndEffectorPrimition = true;
     }
 
-    ifFeed = ifFeedFunc.getAsBoolean();
-
-    if((ifFeed) || (LEDConstants.arrivePosition_Intake && LEDConstants.arrivePosition_Base)) {
-      m_EndEffectorSubsystem.Wheel_shootCoral_L2();
-    }else {
-      m_EndEffectorSubsystem.stopWheel();
-    }
-
-    if(m_ElevatorSubsystem.arriveSetPoint() && m_EndEffectorSubsystem.arrivedSetpoint()) {
-      LEDConstants.arrivePosition_Intake = true;
-      LEDConstants.LEDFlag = true;
-    }else {
-      LEDConstants.arrivePosition_Intake = false;
-      LEDConstants.LEDFlag = true;
+    if(arriveEndEffectorPrimition && m_EndEffectorSubsystem.canUp()) {
+      m_ElevatorSubsystem.outCoral_L3();
+      if(m_ElevatorSubsystem.arriveSetPoint()) {
+        m_EndEffectorSubsystem.Arm_shootCoral_L3();
+        
+        if(m_ElevatorSubsystem.arriveSetPoint()) {
+          LEDConstants.arrivePosition_Intake = true;
+          LEDConstants.LEDFlag = true;
+        }else {
+          LEDConstants.arrivePosition_Intake = false;
+          LEDConstants.LEDFlag = true;
+        }
+      } 
     }
 
   }
@@ -71,7 +69,7 @@ public class Coral_L2 extends Command {
   @Override
   public void end(boolean interrupted) {
     // m_ElevatorSubsystem.toPrimitive();
-    // m_EndEffectorSubsystem.primitiveArm();
+    // m_EndEffectorSubsystem.Arm_IDLE();
     // m_EndEffectorSubsystem.stopWheel();
 
     // LEDConstants.intakeArriving = false;

@@ -149,7 +149,8 @@ public class EndEffectorSubsystem extends SubsystemBase {
     public void Arm_intakeAlgae_High() {goalAngle = EndEffectorConstants.algaeHighInAngle;}
     public void Arm_intakeAlgae_Floor() {goalAngle = EndEffectorConstants.algaeFloorAngle;}
 
-    public void primitiveArm_HasCoral(){goalAngle = EndEffectorConstants.primitiveAngle_HasCoral;}
+    public void primitiveArm_HasCoral() {goalAngle = EndEffectorConstants.primitiveAngle_HasCoral;}
+    public void Arm_RemoveAlgae() {goalAngle = EndEffectorConstants.algaeRemoveAngle;}
 
     // ======== Wheel ========
     // Inatake coral
@@ -171,7 +172,8 @@ public class EndEffectorSubsystem extends SubsystemBase {
     public void Wheel_shootAlgae_Processor() {wheelMotor.setVoltage(EndEffectorConstants.algaeShootProcessorVol);}
     // Wheel control
     public void outAlgae() {wheelMotor.setVoltage(EndEffectorConstants.algaeOutVol);}
-    public void holdAlgae(){wheelMotor.setVoltage(EndEffectorConstants.algaeHoldVol);}
+    public void holdAlgae() {wheelMotor.setVoltage(EndEffectorConstants.algaeHoldVol);}
+    public void RemoveAlgae() {wheelMotor.setVoltage(EndEffectorConstants.algaeRemoveVol);}
     public void stopWheel() {wheelMotor.setControl(requst_wheelSpeed.withVelocity(0));}
 
     

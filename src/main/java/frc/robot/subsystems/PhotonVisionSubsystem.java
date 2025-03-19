@@ -193,27 +193,39 @@ public class PhotonVisionSubsystem extends SubsystemBase {
   
   public double getXError_Reef(String reef) {
     if(reef == "RightReef") return Math.abs(getXMeasurements_FrontLeft() - PhotonConstants.xPidSetPoint_RightReef);
-    else return Math.abs(getXMeasurements_FrontRight() - PhotonConstants.xPidSetPoint_LeftReef);
+    else if(reef == "LeftReef") return Math.abs(getXMeasurements_FrontRight() - PhotonConstants.xPidSetPoint_LeftReef);
+    else if(reef == "MiddleReef_FrontRight") return Math.abs(getXMeasurements_FrontRight() - PhotonConstants.xPidSetPoint_MiddleReef_FrontRight);
+    else return Math.abs(getXMeasurements_FrontLeft() - PhotonConstants.xPidSetPoint_MiddleReef_FrontLeft);
   }
 
   public double getYError_Reef(String reef) {
     if(reef == "RightReef") return Math.abs(getYMeasurements_FrontLeft() - PhotonConstants.yPidSetPoint_RightReef);
-    else return Math.abs(getYMeasurements_FrontRight() - PhotonConstants.yPidSetPoint_LeftReef);
+    else if(reef == "LeftReef") return Math.abs(getYMeasurements_FrontRight() - PhotonConstants.yPidSetPoint_LeftReef);
+    else if(reef == "MiddleReef_FrontRight") return Math.abs(getYMeasurements_FrontRight() - PhotonConstants.yPidSetPoint_MiddleReef_FrontRight);
+    else return Math.abs(getYMeasurements_FrontLeft() - PhotonConstants.yPidSetPoint_MiddleReef_FrontLeft);
   }
 
   public double getRotationError_Reef(String reef) {
     if(reef == "RightReef") return Math.abs(getRotationMeasurements_FrontLeft() - PhotonConstants.rotationPidSetPoint_RightReef);
-    else return Math.abs(getRotationMeasurements_FrontRight() - PhotonConstants.rotationPidSetPoint_LeftReef);
+    else if(reef == "LeftReef") return Math.abs(getRotationMeasurements_FrontRight() - PhotonConstants.rotationPidSetPoint_LeftReef);
+    else if(reef == "MiddleReef_FrontRight") return Math.abs(getRotationMeasurements_FrontRight() - PhotonConstants.rotationPidSetPoint_MiddleReef_FrontRight);
+    else return Math.abs(getRotationMeasurements_FrontLeft() - PhotonConstants.rotationPidSetPoint_MiddleReef_FrontLeft);
   }
 
   public boolean isArrive_Reef(String reef) {
     if(reef == "rightReef") {
       if((getXError_Reef("RightReef")) <= 0.03 && (getYError_Reef("RightReef") <= 0.03) && (getRotationError_Reef("RightReef") <= 0.75) && hasFrontLeftTarget()) return true;
       else return false;
-    }else {
+    }else if(reef == "LeftReef") {
       if((getXError_Reef("LeftReef")) <= 0.02 && (getYError_Reef("LeftReef") <= 0.02) && (getRotationError_Reef("LeftReef") <= 0.5) && hasFrontRightTarget()) return true;
       else return false;
-    }
+    }else if(reef == "MiddleReef_FrontRight") {
+      if((getXError_Reef("MiddleReef_FrontRight") <= 0.02) && (getYError_Reef("MiddleReef_FrontRight") <= 0.02) && (getRotationError_Reef("MiddleReef_FrontRight") <= 0.5)) return true;
+      else return false;
+    }else {
+      if((getXError_Reef("MiddleReef_FrontLeft") <= 0.02) && (getYError_Reef("MiddleReef_FrontLeft") <= 0.02) && (getRotationError_Reef("MiddleReef_FrontLeft") <= 0.5)) return true;
+      else return false;
+    } 
   }
 
   public PhotonPipelineResult getResult(String camera) {
